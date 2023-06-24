@@ -6,7 +6,7 @@ namespace ATM
     {
         static void Main(string[] args)
         {
-            Cardholder user = new Cardholder("Luke", 2023, 100.00f);
+            Cardholder user = new Cardholder("Luke", 2023, 100);
             Console.WriteLine("Hi " + user.Name + ", please enter your PIN:");
             int input = int.Parse(Console.ReadLine());
 
@@ -16,7 +16,7 @@ namespace ATM
 
                 while (!exitRequested)
                 {
-                    float balance = (user.GetBalance());
+                    decimal balance = (user.GetBalance());
                     Console.WriteLine("Options:");
                     Console.WriteLine("1: Show Balance");
                     Console.WriteLine("2. Deposit");
@@ -81,7 +81,7 @@ namespace ATM
         static void Deposit(Cardholder user)
         {
             Console.WriteLine("Please enter the amount you want to deposit:");
-            float amountDeposited = float.Parse(Console.ReadLine());
+            decimal amountDeposited = decimal.Parse(Console.ReadLine());
             user.Deposit(amountDeposited);
             Console.WriteLine("Your new balance is: " + user.GetBalance().ToString("F2"));
 
@@ -108,9 +108,9 @@ namespace ATM
 
         static void Withdraw(Cardholder user)
         {
-            float userBalance = user.GetBalance();
+            decimal userBalance = user.GetBalance();
             Console.WriteLine("Please enter the amount you would like to withdraw:");
-            float amountWithdrawn = float.Parse(Console.ReadLine());
+            decimal amountWithdrawn = decimal.Parse(Console.ReadLine());
 
             if (amountWithdrawn > userBalance)
             {
@@ -155,26 +155,26 @@ namespace ATM
     {
         public string Name { get; private set; }
         public int PIN { get; private set; }
-        public float Balance { get; private set; }
+        public decimal Balance { get; private set; }
 
-        public Cardholder(string name, int pin, float balance)
+        public Cardholder(string name, int pin, decimal balance)
         {
             Name = name;
             PIN = pin;
             Balance = balance;
         }
 
-        public float GetBalance()
+        public decimal GetBalance()
         {
             return Balance;
         }
 
-        public void Deposit(float deposited)
+        public void Deposit(decimal deposited)
         {
             Balance += deposited;
         }
 
-        public void Withdraw(float withdrawn)
+        public void Withdraw(decimal withdrawn)
         {
             Balance -= withdrawn;
         }
